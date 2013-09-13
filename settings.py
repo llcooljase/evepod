@@ -17,9 +17,8 @@ MONGO_PASSWORD = 'cych2re7shu5quim'
 MONGO_DBNAME = 'evepod'	
 
 #if os.environ.get('PORT'):
-	# We're hosted on Heroku! Use the MongoHQ Sandbox as our backend
-	# Set API entry point (for heroku):
-SERVER_NAME = 'immense-shelf-8617.herokuapp.com'
+# We're hosted on Heroku! Use the MongoHQ Sandbox as our backend
+# Set API entry point (for heroku):
 
 #else:
 # Set API entry point:
