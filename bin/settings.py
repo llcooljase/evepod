@@ -7,28 +7,21 @@
 #
 #------------------------------------------------------------------------------
 import os
+
 # FIGURE OUT WHERE WE ARE RUNNING... ON HEROKU, OR LOCALLY?
 
-if os.environ.get('PORT'):
-	# We're hosted on Heroku! Use the MongoHQ Sandbox as our backend
-	MONGO_HOST = 'paulo.mongohq.com'
-	MONGO_PORT = 10086
-	MONGO_USERNAME = 'tushivjek'
-	MONGO_PASSWORD = 'cych2re7shu5quim'
-	MONGO_DBNAME = 'evepod'	
-	# Set API entry point (for heroku):
-	SERVER_NAME = 'immense-shelf-8617.herokuapp.com'
-else:
-	# We're running on a local machine. Let's just use the local mongod instance.
-	# Note that MONGO_HOST and MONGO_PORT could be left out, because they are 
-	# pointing to defaults in a barebone mongod instance!
-	MONGO_HOST = 'paulo.mongohq.com'
-	MONGO_PORT = 10086
-	MONGO_USERNAME = 'tushivjek'
-	MONGO_PASSWORD = 'cych2re7shu5quim'
-	MONGO_DBNAME = 'evepod'	
-	# Set API entry point:
-	SERVER_NAME = '0.0.0.0:5000'
+#if os.environ.get('PORT'):
+# We're hosted on Heroku! Use the MongoHQ Sandbox as our backend
+MONGO_HOST = 'paulo.mongohq.com'
+MONGO_PORT = 10086
+MONGO_USERNAME = 'tushivjek'
+MONGO_PASSWORD = 'cych2re7shu5quim'
+MONGO_DBNAME = 'evepod'	
+# Set API entry point (for heroku):
+# SERVER_NAME = 'immense-shelf-8617.herokuapp.com'
+# Set API entry point:
+
+SERVER_NAME = '0.0.0.0:5000'
 	
 # 
 
@@ -172,7 +165,6 @@ pods = {
 	# We choose to override global cache-control directives for this resource.
 	'cache_control': 'max-age=10,must-revalidate',
 	'cache_expires': 10,
-	
 	# most global settings can be overridden at resource level
 	'resource_methods': ['GET', 'POST', 'DELETE'],
 	'schema': pod_schema
@@ -206,7 +198,7 @@ users = {
 	# by default the standard item entry point is defined as
 	# '/<item_title>/<ObjectId>/'. We leave it untouched, and we also enable an
 	# additional read-only entry point. This way consumers can also perform
-	# GET requests at '/<item_title>/<lastname>/'.
+	# GET requests at '/<item_title>/<username>/'.
 	'additional_lookup': {
 		'url': '[\w]+',
 		'field': 'username'
