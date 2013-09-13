@@ -16,6 +16,7 @@ if os.environ.get('PORT'):
 	MONGO_USERNAME = 'tushivjek'
 	MONGO_PASSWORD = 'cych2re7shu5quim'
 	MONGO_DBNAME = 'evepod'	
+	# Set API entry point (for heroku):
 	SERVER_NAME = 'immense-shelf-8617.herokuapp.com'
 else:
 	# We're running on a local machine. Let's just use the local mongod instance.
@@ -26,10 +27,10 @@ else:
 	MONGO_USERNAME = 'tushivjek'
 	MONGO_PASSWORD = 'cych2re7shu5quim'
 	MONGO_DBNAME = 'evepod'	
+	# Set API entry point:
+	SERVER_NAME = '0.0.0.0:5000'
 	
-	# Still need to set the API entry point:
-
-# SERVER_NAME = '0.0.0.0:5000'
+# 
 
 # Mongo HQ url:
 # mongodb://tushivjek:cych2re7shu5quim@paulo.mongohq.com:10046/poddleTest
