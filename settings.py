@@ -16,7 +16,7 @@ if os.environ.get('PORT'):
 	MONGO_USERNAME = 'tushivjek'
 	MONGO_PASSWORD = 'cych2re7shu5quim'
 	MONGO_DBNAME = 'evepod'	
-	SERVER_NAME = 'http://immense-shelf-8617.herokuapp.com'
+	SERVER_NAME = 'immense-shelf-8617.herokuapp.com'
 else:
 	# We're running on a local machine. Let's just use the local mongod instance.
 	# Note that MONGO_HOST and MONGO_PORT could be left out, because they are 
