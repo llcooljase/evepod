@@ -29,7 +29,7 @@ else:
 	
 	# Still need to set the API entry point:
 
-SERVER_NAME = '0.0.0.0:5000'
+# SERVER_NAME = '0.0.0.0:5000'
 
 # Mongo HQ url:
 # mongodb://tushivjek:cych2re7shu5quim@paulo.mongohq.com:10046/poddleTest
