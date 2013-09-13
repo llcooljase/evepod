@@ -1,1 +1,1 @@
-web: gunicorn evepod:app
+web: python evepod.py
