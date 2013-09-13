@@ -39,8 +39,8 @@ ITEM_METHODS = ['GET', 'PATCH', 'DELETE']
 
 # Set the public methods for the read-only API. 
 # Only authorized users can write, edit and delete
-PUBLIC_METHODS = ['GET'] 
-PUBLIC_ITEM_METHODS = ['GET']
+# PUBLIC_METHODS = ['GET'] 
+# PUBLIC_ITEM_METHODS = ['GET']
 
 #------------------------------------------------------------------------------
 #
@@ -188,8 +188,6 @@ datasets = {
 	
 	# most global settings can be overridden at resource level
 	'resource_methods': ['GET', 'POST', 'DELETE'],
-	'item_methods':['GET','POST','DELETE'],
-	
 	'schema': dataset_schema
 }
 
