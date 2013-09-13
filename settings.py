@@ -201,7 +201,7 @@ users = {
 	# GET requests at '/<item_title>/<username>/'.
 	'additional_lookup': {
 		'url': '[\w]+',
-		'field': 'username'
+		'field': 'u'
 	},
 	# We choose to override global cache-control directives for this resource.
 	'cache_control': '',
