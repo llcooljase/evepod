@@ -1,5 +1,5 @@
 import os
 from eve import Eve
 
-app = Eve(settings='../settings.py')
+app = Eve()
 app.run()
