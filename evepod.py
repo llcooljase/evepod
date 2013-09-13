@@ -2,7 +2,7 @@ import os
 from eve import Eve
 
 
-app = Eve(settings='settings.py')
+app = Eve()
 
 # Heroku defines a $PORT environment variable that we use to determine
 # if we're running locally or not.
