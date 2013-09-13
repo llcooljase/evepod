@@ -74,12 +74,12 @@ dataset_schema = {
 		'unique': True,
 	},
 	'users': {'type':'list','items':[{'type':'string'}]},
-	'data': {
+	'd': {
 		'type':'list','schema':{
-			'timestamp':{'type':'datetime','required':True},
-			'value':{'type':'float','required':True},
-			'pod':{'type':'string','required':True},
-			'sensor':{'type':'string','required':True},
+			't':{'type':'datetime','required':True},
+			'v':{'type':'float','required':True},
+			'p':{'type':'string','required':True},
+			's':{'type':'string','required':True},
 		},
 	},
 }
@@ -87,12 +87,12 @@ dataset_schema = {
 user_schema = {
 	# Schema definition, based on Cerberus grammar. Check the Cerberus project
 	# (https://github.com/nicolaiarocci/cerberus) for details.
-	'username' : {
+	'u' : {
 		'type' : 'string',
 		'required' : True,
 		'unique' : True,
 	},
-	'password' : { # Plaintext. We're awful
+	'p' : { # Plaintext. We're awful
 		'type':'string',
 		'required': True, 	
 	},
@@ -188,6 +188,8 @@ datasets = {
 	
 	# most global settings can be overridden at resource level
 	'resource_methods': ['GET', 'POST', 'DELETE'],
+	'item_methods':['GET','POST','DELETE'],
+	
 	'schema': dataset_schema
 }
 
