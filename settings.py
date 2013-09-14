@@ -74,14 +74,16 @@ dataset_schema = {
 		'unique': True,
 	},
 	'users': {'type':'list','items':[{'type':'string'}]},
-	'd': {
-		'type':'list','schema':{
-			't':{'type':'datetime','required':True},
-			'v':{'type':'float','required':True},
-			'p':{'type':'string','required':True},
-			's':{'type':'string','required':True},
-		},
-	},
+}
+
+data_schema = {
+	# Schema definition, based on Cerberus grammar. Check the Cerberus project
+	# (https://github.com/nicolaiarocci/cerberus) for details.
+	# Note: using short variable names to save space in MongoDB.
+	't':{'type':'datetime','required':True}, # timestamp
+	'v':{'type':'float','required':True},    # value
+	'p':{'type':'string','required':True},   # pod
+	's':{'type':'string','required':True},   # sensor
 }
 
 user_schema = {
@@ -191,6 +193,13 @@ datasets = {
 	'schema': dataset_schema
 }
 
+data = {
+
+	# most global settings can be overridden at resource level
+	'resource_methods': ['GET', 'POST', 'DELETE'],
+	'schema': data_schema	
+}
+
 users = {
 	# 'title' tag used in item links. Defaults to the resource title minus
 	# the final, plural 's' (works fine in most cases but not for 'people')
@@ -272,5 +281,6 @@ DOMAIN = {
 		'users':users,
 		'datasets':datasets,
 		'sensors':sensors,
+		'data':data,
 }
 
