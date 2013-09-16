@@ -10,23 +10,22 @@ import os
 
 # FIGURE OUT WHERE WE ARE RUNNING... ON HEROKU, OR LOCALLY?
 
-MONGO_HOST = 'paulo.mongohq.com'
-MONGO_PORT = 10086
-MONGO_USERNAME = 'tushivjek'
-MONGO_PASSWORD = 'cych2re7shu5quim'
-MONGO_DBNAME = 'evepod'	
+if os.environ.get('PORT'):
+	# We're hosted on Heroku! Use the MongoHQ Sandbox as our backend
+	# Set API entry point (for heroku):
+	MONGO_HOST = 'paulo.mongohq.com'
+	MONGO_PORT = 10086
+	MONGO_USERNAME = 'tushivjek'
+	MONGO_PASSWORD = 'cych2re7shu5quim'
+	MONGO_DBNAME = 'evepod'	
+	SERVER_NAME = 'immense-shelf-8617.herokuapp.com'
+else:
+	# Run locally, because my internet at home stinks
+	MONGO_HOST = 'localhost'
+	MONGO_PORT = 27017
+	MONGO_DBNAME = 'evepod'
+	SERVER_NAME = '0.0.0.0:5000'
 
-#if os.environ.get('PORT'):
-# We're hosted on Heroku! Use the MongoHQ Sandbox as our backend
-# Set API entry point (for heroku):
-SERVER_NAME = 'immense-shelf-8617.herokuapp.com'
-
-#else:
-# Set API entry point:
-#	SERVER_NAME = '0.0.0.0:5000'
-
-# Mongo HQ url:
-# mongodb://tushivjek:cych2re7shu5quim@paulo.mongohq.com:10046/poddleTest
 
 # Enable reads (GET), inserts (POST) and DELETE for resources/collections
 # (if you omit this line, the API will default to ['GET'] and provide
@@ -80,10 +79,11 @@ data_schema = {
 	# Schema definition, based on Cerberus grammar. Check the Cerberus project
 	# (https://github.com/nicolaiarocci/cerberus) for details.
 	# Note: using short variable names to save space in MongoDB.
-	't':{'type':'datetime','required':True}, # timestamp
-	'v':{'type':'float','required':True},    # value
-	'p':{'type':'string','required':True},   # pod
-	's':{'type':'string','required':True},   # sensor
+	't':{'type':'datetime','required':False},  # datetime
+	'ts':{'type':'timestamp','required':False}, # timestamp
+	'v':{'type':'float','required':True},      # value
+	'p':{'type':'string','required':True},     # pod
+	's':{'type':'string','required':True},     # sensor
 }
 
 user_schema = {
