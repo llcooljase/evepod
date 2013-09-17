@@ -18,7 +18,7 @@ if os.environ.get('PORT'):
 	MONGO_USERNAME = 'tushivjek'
 	MONGO_PASSWORD = 'cych2re7shu5quim'
 	MONGO_DBNAME = 'evepod'	
-	SERVER_NAME = 'immense-shelf-8617.herokuapp.com'
+	SERVER_NAME = 'app.pulsepod.io'
 else:
 	# Run locally, because my internet at home stinks
 	MONGO_HOST = 'localhost'

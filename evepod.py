@@ -1,6 +1,4 @@
 import os
-import calendar, datetime
-import re
 from eve import Eve
 
 app = Eve()
@@ -20,7 +18,7 @@ if port:
     host = '0.0.0.0'
     port = int(port)
 else:
-    host = '127.0.0.1'
+    host = '0.0.0.0'
     port = 5000
 
 # Start the application
