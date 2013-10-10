@@ -52,35 +52,44 @@ ITEM_METHODS = ['GET', 'PATCH', 'DELETE']
 gateway_schema = {
 	# Schema definition, based on Cerberus grammar. Check the Cerberus project
 	# (https://github.com/nicolaiarocci/cerberus) for details.
-	'urlname' : {
+	'urlid' : {
 		'type': 'string',
 		'minlength': 1,
 		'maxlength': 10,
 		'required': True,
 		'unique': True,
 	},
-	'pods' : {'type':'list','items':[{'type':'string'}]},
+	'pods' : {'type':'list','items':[{
+											'type':'objectid',
+											'data_relation': {
+												'collection':'pods',
+												'field':'_id',
+												'embeddable':True
+												}
+											},
+											]
+				},
 }
 
 dataset_schema = {
 	# Schema definition, based on Cerberus grammar. Check the Cerberus project
 	# (https://github.com/nicolaiarocci/cerberus) for details.
-	'urlname' : {
+	'urlid' : { # Dataset url name
 		'type': 'string',
 		'minlength': 1,
 		'maxlength': 10,
 		'required': True,
 		'unique': True,
 	},
-	'users': {'type':'list','items':[{'type':'string'}]},
+	'users': {'type':'list','items':[{'type':'string'}]}, # Should be embeddable
+	'pods': {'type':'list','items':[{'type':'string'}]},  # Should be embeddable
 }
 
 data_schema = {
 	# Schema definition, based on Cerberus grammar. Check the Cerberus project
 	# (https://github.com/nicolaiarocci/cerberus) for details.
 	# Note: using short variable names to save space in MongoDB.
-	't':{'type':'datetime','required':False},  # datetime
-	'ts':{'type':'timestamp','required':False}, # timestamp
+	't':{'type':'datetime','required':True},   # datetime
 	'v':{'type':'float','required':True},      # value
 	'p':{'type':'string','required':True},     # pod
 	's':{'type':'string','required':True},     # sensor
@@ -89,7 +98,7 @@ data_schema = {
 user_schema = {
 	# Schema definition, based on Cerberus grammar. Check the Cerberus project
 	# (https://github.com/nicolaiarocci/cerberus) for details.
-	'u' : {
+	'u' : { # username
 		'type' : 'string',
 		'required' : True,
 		'unique' : True,
@@ -103,26 +112,26 @@ user_schema = {
 pod_schema = { 
 	# Schema definition, based on Cerberus grammar. Check the Cerberus project
 	# (https://github.com/nicolaiarocci/cerberus) for details.
-	'urlname' : {
+	'urlid' : { # Pod URL name
 		'type': 'string',
 		'minlength': 1,
 		'maxlength': 10,
 		'required': True,
 	},
-	'id' : {
+	'id' : { # Pod ID
 		'type': 'string',
 		'minlength': 7,
 		'maxlength': 7,
 		'required': True,
 		'unique': True,
 	},
-	'dataset' : {
+	'ds' : { # dataset (should be embeddable?)
 		'type':'string',
 	},
-	'gateway' : {
+	'g' : { # Gateway (should be embeddable?)
 		'type':'string',
 	},
-	'serialnumber':{
+	'sn':{ # Serial Number (does not need to be unique, since one SN can be many pods!
 		'type':'string',
 	},
 }
@@ -130,7 +139,7 @@ pod_schema = {
 sensor_schema = { 
 	# Schema definition, based on Cerberus grammar. Check the Cerberus project
 	# (https://github.com/nicolaiarocci/cerberus) for details.
-	'urlname' : {
+	'urlid' : {
 		'type': 'string',
 		'minlength': 1,
 		'maxlength': 10,
@@ -162,13 +171,14 @@ pods = {
 	# GET requests at '/<item_title>/<urlname>/'.
 	'additional_lookup': {
 		'url': '[\w]+',
-		'field': 'urlname'
+		'field': 'urlid'
 	},
 	# We choose to override global cache-control directives for this resource.
 	'cache_control': 'max-age=10,must-revalidate',
 	'cache_expires': 10,
 	# most global settings can be overridden at resource level
 	'resource_methods': ['GET', 'POST', 'DELETE'],
+	'item_methods': ['GET','PATCH'],
 	'schema': pod_schema
 }
 
@@ -182,7 +192,7 @@ datasets = {
 	# GET requests at '/<item_title>/<urlname>/'.
 	'additional_lookup': {
 		'url': '[\w]+',
-		'field': 'urlname'
+		'field': 'urlid'
 	},
 	# We choose to override global cache-control directives for this resource.
 	'cache_control': 'max-age=10,must-revalidate',
@@ -236,7 +246,7 @@ gateways = {
 	# GET requests at '/<item_title>/<lastname>/'.
 	'additional_lookup': {
 		'url': '[\w]+',
-		'field': 'urlname'
+		'field': 'urlid'
 	},
 	# We choose to override global cache-control directives for this resource.
 	'cache_control': 'max-age=10,must-revalidate',
@@ -257,7 +267,7 @@ sensors = {
 	# GET requests at '/<item_title>/<lastname>/'.
 	'additional_lookup': {
 		'url': '[\w]+',
-		'field': 'urlname'
+		'field': 'urlid'
 	},
 	# We choose to override global cache-control directives for this resource.
 	'cache_control': 'max-age=10,must-revalidate',
