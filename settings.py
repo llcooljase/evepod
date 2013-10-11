@@ -152,6 +152,10 @@ sensor_schema = {
 		'required': True,
 		'unique': True,
 	},
+	'nbytes' : {
+		'type':'integer',
+		'required':True
+	}
 }
 
 #------------------------------------------------------------------------------
