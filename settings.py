@@ -89,7 +89,7 @@ data_schema = {
 	# Schema definition, based on Cerberus grammar. Check the Cerberus project
 	# (https://github.com/nicolaiarocci/cerberus) for details.
 	# Note: using short variable names to save space in MongoDB.
-	't':{'type':'datetime','required':True},   # datetime
+	't':{'type':'datetime','required':True},   # datetime 
 	'v':{'type':'float','required':True},      # value
 	'p':{'type':'string','required':True},     # pod
 	's':{'type':'string','required':True},     # sensor
@@ -112,13 +112,14 @@ user_schema = {
 pod_schema = { 
 	# Schema definition, based on Cerberus grammar. Check the Cerberus project
 	# (https://github.com/nicolaiarocci/cerberus) for details.
+	# Sensor text ID for use in URLs and in API data queries/submissions
 	'urlid' : { # Pod URL name
 		'type': 'string',
 		'minlength': 1,
 		'maxlength': 10,
 		'required': True,
 	},
-	'id' : { # Pod ID
+	'id' : { # Pod ID number (usually SIM number)
 		'type': 'string',
 		'minlength': 7,
 		'maxlength': 7,
@@ -139,12 +140,14 @@ pod_schema = {
 sensor_schema = { 
 	# Schema definition, based on Cerberus grammar. Check the Cerberus project
 	# (https://github.com/nicolaiarocci/cerberus) for details.
+	# Sensor text ID for use in URLs and in API data queries/submissions
 	'urlid' : {
 		'type': 'string',
 		'minlength': 1,
 		'maxlength': 16,
 		'required': True,
 	},
+	# Unique sensor ID. SID will be referenced in the PUD but should NOT be used elsewhere
 	'sid' : {
 		'type': 'integer',
 		'minlength': 1,
@@ -152,16 +155,28 @@ sensor_schema = {
 		'required': True,
 		'unique': True,
 	},
+	# Number of bytes required for each piece of sensor data
 	'nbytes' : {
 		'type':'integer',
 		'required':True,
 	},
+	# Format of data values, based on structs library http://docs.python.org/2/library/struct.html
 	'fmt' : {
 		'type':'string',
 		'required':True,
 		'minlength':1,
 		'maxlength':256,
+		'allowed': ['x','c','b','B','?','h','H','i','I','l','L','q','Q','f','d','s','p','P'],
 	},
+	# Byte order of data values, based on structs library http://docs.python.org/2/library/struct.html
+	'byteorder' : {
+		'type':'string',
+		'required':False,
+		'minlength':1,
+		'maxlength':1,
+		'allowed': ['@','=','<','>','!'],
+		'default':'@',
+	}
 }
 
 #------------------------------------------------------------------------------
