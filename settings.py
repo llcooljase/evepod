@@ -154,14 +154,14 @@ sensor_schema = {
 	},
 	'nbytes' : {
 		'type':'integer',
-		'required':True
-	}
+		'required':True,
+	},
 	'fmt' : {
 		'type':'string',
 		'required':True,
 		'minlength':1,
 		'maxlength':256,
-	}
+	},
 }
 
 #------------------------------------------------------------------------------
