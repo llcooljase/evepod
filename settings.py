@@ -145,10 +145,10 @@ sensor_schema = {
 		'maxlength': 10,
 		'required': True,
 	},
-	'id' : {
-		'type': 'string',
-		'minlength': 8,
-		'maxlength': 8,
+	'sid' : {
+		'type': 'integer',
+		'minlength': 1,
+		'maxlength': 3,
 		'required': True,
 		'unique': True,
 	},
