@@ -156,6 +156,12 @@ sensor_schema = {
 		'type':'integer',
 		'required':True
 	}
+	'fmt' : {
+		'type':'string',
+		'required':True,
+		'minlength':1,
+		'maxlength':256,
+	}
 }
 
 #------------------------------------------------------------------------------
