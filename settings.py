@@ -142,7 +142,7 @@ sensor_schema = {
 	'urlid' : {
 		'type': 'string',
 		'minlength': 1,
-		'maxlength': 10,
+		'maxlength': 16,
 		'required': True,
 	},
 	'sid' : {
