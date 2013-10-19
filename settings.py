@@ -93,6 +93,7 @@ data_schema = {
 	'v':{'type':'float','required':True},      # value
 	'p':{'type':'string','required':True},     # pod
 	's':{'type':'string','required':True},     # sensor
+	# 'var':{'type':'string',}				    # variable
 }
 
 user_schema = {
@@ -116,13 +117,13 @@ pod_schema = {
 	'urlid' : { # Pod URL name
 		'type': 'string',
 		'minlength': 1,
-		'maxlength': 10,
+		'maxlength': 20,
 		'required': True,
 	},
 	'id' : { # Pod ID number (usually SIM number)
 		'type': 'string',
 		'minlength': 7,
-		'maxlength': 7,
+		'maxlength': 27,
 		'required': True,
 		'unique': True,
 	},
@@ -164,9 +165,9 @@ sensor_schema = {
 	'fmt' : {
 		'type':'string',
 		'required':True,
-		'minlength':1,
+		'minlength':2,
 		'maxlength':256,
-		'allowed': ['x','c','b','B','?','h','H','i','I','l','L','q','Q','f','d','s','p','P'],
+		'allowed': ['x','c','b','B','?','h','H','i','I','l','L','q','Q','f','d','s','p','P','<h'],
 	},
 	# Byte order of data values, based on structs library http://docs.python.org/2/library/struct.html
 	'byteorder' : {
