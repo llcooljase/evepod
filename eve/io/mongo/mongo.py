@@ -46,7 +46,7 @@ class Mongo(DataLayer):
         be expressed in two different formats: the mongo query syntax, and the
         python syntax. The first kind of query would look like: ::
 
-            ?where={"name": "john doe}
+            ?where={\"name": "john doe}
 
         while the second would look like: ::
 

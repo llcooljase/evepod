@@ -39,7 +39,6 @@ class Config(object):
 # importing eve.utils.
 config = Config()
 
-
 class ParsedRequest(object):
     """ This class, by means of its attributes, describes a client request.
 

@@ -92,8 +92,7 @@ data_schema = {
 	't':{'type':'datetime','required':True},   # datetime 
 	'v':{'type':'float','required':True},      # value
 	'p':{'type':'string','required':True},     # pod
-	's':{'type':'string','required':True},     # sensor
-	# 'var':{'type':'string',}				    # variable
+	's':{'type':'string','required':True,'embeddable':True},     # sensor
 }
 
 user_schema = {
@@ -166,9 +165,10 @@ sensor_schema = {
 		'type':'string',
 		'required':True,
 		'minlength':2,
-		'maxlength':256,
-		'allowed': ['x','c','b','B','?','h','H','i','I','l','L','q','Q','f','d','s','p','P','<h'],
+		'maxlength':180,
+		'allowed': ['x','c','b','B','?','h','H','i','I','l','L','q','Q','f','d','s','p','P'],
 	},
+	
 	# Byte order of data values, based on structs library http://docs.python.org/2/library/struct.html
 	'byteorder' : {
 		'type':'string',
@@ -177,7 +177,21 @@ sensor_schema = {
 		'maxlength':1,
 		'allowed': ['@','=','<','>','!'],
 		'default':'@',
-	}
+	},
+	
+	# Format info: A text string specified for each sensor
+	'info' : {
+			'type':'string',
+			'required':False,
+			'minlength':1,
+			'maxlength':256,
+			'default':'no additional information is available for this sensor',
+	},
+	
+	
+	
+		
+	
 }
 
 #------------------------------------------------------------------------------

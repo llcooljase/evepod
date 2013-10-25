@@ -14,7 +14,6 @@ def deploy_new_pod(request, payload):
 		g = app.data.find_one(gateways,{"urlid":"robogateway"})
 		print json.dumps(g)
 		
-	
 def deploy_new_gateway(request, payload):
 	for d in documents:
 		print "DEPLOYING a new GATEWAY, " + d["urlid"] + " !"
