@@ -141,12 +141,6 @@ class Pool:
         # Can override for testing: 0 to always check, None to never check.
         self._check_interval_seconds = 1
 
-        if use_greenlets and not thread_util.have_gevent:
-            raise ConfigurationError(
-                "The Gevent module is not available. "
-                "Install the gevent package from PyPI."
-            )
-
         self.sockets = set()
         self.lock = threading.Lock()
 
@@ -169,10 +163,16 @@ class Pool:
         if HAS_SSL and use_ssl and not ssl_cert_reqs:
             self.ssl_cert_reqs = ssl.CERT_NONE
 
-        self._ident = thread_util.create_ident(use_greenlets)
-
         # Map self._ident.get() -> request socket
         self._tid_to_sock = {}
+
+        if use_greenlets and not thread_util.have_gevent:
+            raise ConfigurationError(
+                "The Gevent module is not available. "
+                "Install the gevent package from PyPI."
+            )
+
+        self._ident = thread_util.create_ident(use_greenlets)
 
         # Count the number of calls to start_request() per thread or greenlet
         self._request_counter = thread_util.Counter(use_greenlets)
@@ -324,28 +324,34 @@ class Pool:
         elif not self._socket_semaphore.acquire(True, self.wait_queue_timeout):
             self._raise_wait_queue_timeout()
 
-        sock_info, from_pool = None, None
+        # We've now acquired the semaphore and must release it on error.
         try:
+            sock_info, from_pool = None, None
             try:
-                # set.pop() isn't atomic in Jython less than 2.7, see
-                # http://bugs.jython.org/issue1854
-                self.lock.acquire()
-                sock_info, from_pool = self.sockets.pop(), True
-            finally:
-                self.lock.release()
-        except KeyError:
-            sock_info, from_pool = self.connect(pair), False
+                try:
+                    # set.pop() isn't atomic in Jython less than 2.7, see
+                    # http://bugs.jython.org/issue1854
+                    self.lock.acquire()
+                    sock_info, from_pool = self.sockets.pop(), True
+                finally:
+                    self.lock.release()
+            except KeyError:
+                sock_info, from_pool = self.connect(pair), False
 
-        if from_pool:
-            sock_info = self._check(sock_info, pair)
+            if from_pool:
+                sock_info = self._check(sock_info, pair)
 
-        sock_info.forced = forced
+            sock_info.forced = forced
 
-        if req_state == NO_SOCKET_YET:
-            # start_request has been called but we haven't assigned a socket to
-            # the request yet. Let's use this socket for this request until
-            # end_request.
-            self._set_request_state(sock_info)
+            if req_state == NO_SOCKET_YET:
+                # start_request has been called but we haven't assigned a
+                # socket to the request yet. Let's use this socket for this
+                # request until end_request.
+                self._set_request_state(sock_info)
+        except:
+            if not forced:
+                self._socket_semaphore.release()
+            raise
 
         sock_info.last_checkout = time.time()
         return sock_info
