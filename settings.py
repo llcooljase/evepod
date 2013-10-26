@@ -164,8 +164,8 @@ sensor_schema = {
 	'fmt' : {
 		'type':'string',
 		'required':True,
-		'minlength':2,
-		'maxlength':180,
+		'minlength':1,
+		'maxlength':1,
 		'allowed': ['x','c','b','B','?','h','H','i','I','l','L','q','Q','f','d','s','p','P'],
 	},
 	
@@ -176,7 +176,7 @@ sensor_schema = {
 		'minlength':1,
 		'maxlength':1,
 		'allowed': ['@','=','<','>','!'],
-		'default':'@',
+		'default':'<',
 	},
 	
 	# Format info: A text string specified for each sensor
