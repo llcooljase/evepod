@@ -41,4 +41,4 @@ if __name__ == '__main__':
 	app.on_insert_gateways += deploy_new_gateway
 	app.on_insert_dataset += create_new_dataset
 # Run the program:
-	app.run(host=host, port=port)
+	app.run(host=host, port=port, debug=True)

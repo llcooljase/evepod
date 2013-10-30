@@ -179,7 +179,7 @@ sensor_schema = {
 		'default':'<',
 	},
 	
-	# Format info: A text string specified for each sensor
+	# Sensor info: A text string specified for each sensor
 	'info' : {
 			'type':'string',
 			'required':False,
@@ -187,10 +187,21 @@ sensor_schema = {
 			'maxlength':256,
 			'default':'no additional information is available for this sensor',
 	},
+
+	# Magnitude: A multiplier for sensor values
+	'magnitude' : {
+			'type':'float',
+			'required':False,
+			'maxlength':100,
+			'default':1.0,
+	},
 	
-	
-	
-		
+	# Units: A text string that identifies the units for sensor values
+	'units' : {
+			'type':'string',
+			'required':False,
+			'maxlength':100,
+	},	
 	
 }
 
