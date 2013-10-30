@@ -179,7 +179,7 @@ sensor_schema = {
 		'default':'<',
 	},
 	
-	# Sensor info: A text string specified for each sensor
+	# Sensor info: A text string that provides summary info for each sensor
 	'info' : {
 			'type':'string',
 			'required':False,
