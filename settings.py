@@ -13,12 +13,14 @@ import os
 if os.environ.get('PORT'):
 	# We're hosted on Heroku! Use the MongoHQ Sandbox as our backend
 	# Set API entry point (for heroku):
-	MONGO_HOST = 'paulo.mongohq.com'
-	MONGO_PORT = 10086
-	MONGO_USERNAME = 'tushivjek'
-	MONGO_PASSWORD = 'cych2re7shu5quim'
-	MONGO_DBNAME = 'evepod'	
-	SERVER_NAME = 'app.pulsepod.io'
+	# Heroku environmental variables must be set using:
+	# > heroku config:set key=value
+	MONGO_HOST = os.getenv('MONGO_HOST')
+	MONGO_PORT = os.getenv('MONGO_PORT')
+	MONGO_USERNAME = os.getenv('MONGO_USERNAME')
+	MONGO_PASSWORD = os.getenv('MONGO_PASSWORD')
+	MONGO_DBNAME = os.getenv('MONGO_DBNAME')
+	SERVER_NAME = os.getenv('SERVER_NAME')
 else:
 	# Run locally, because my internet at home stinks
 	MONGO_HOST = 'localhost'
