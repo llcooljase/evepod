@@ -171,6 +171,7 @@ sensor_schema = {
 		'allowed': ['x','c','b','B','?','h','H','i','I','l','L','q','Q','f','d','s','p','P'],
 	},
 	
+	
 	# Byte order of data values, based on structs library http://docs.python.org/2/library/struct.html
 	'byteorder' : {
 		'type':'string',
