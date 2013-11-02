@@ -27,6 +27,7 @@ else:
 	MONGO_PORT = 27017
 	MONGO_DBNAME = 'evepod'
 	SERVER_NAME = '0.0.0.0:5000'
+	
 
 
 # Enable reads (GET), inserts (POST) and DELETE for resources/collections
