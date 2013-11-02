@@ -94,7 +94,15 @@ data_schema = {
 	't':{'type':'datetime','required':True},   # datetime 
 	'v':{'type':'float','required':True},      # value
 	'p':{'type':'string','required':True},     # pod
-	's':{'type':'string','required':True,'embeddable':True},     # sensor
+	's':{'type':'string','required':True},     # sensor
+	'sensor':{
+			'type':'objectid',
+			'data_relation': {
+                     'resource': 'sensors',
+                     'field': '_id',
+                     'embeddable': True
+                 },
+			}
 }
 
 user_schema = {
